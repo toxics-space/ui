@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ include "fullname" . }}
+  labels:
+    {{- include "selectorLabels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "selectorLabels" . | nindent 8 }}
+    spec:
+      imagePullSecrets:
+      - name: secret-dockercfg
+
+      containers:
+      - name: ui
+        image: reg.toxics.space/ui:{{ .Values.version }}
+        imagePullPolicy: Always
+        ports:
+        - name: ui-app-port
+          containerPort: 80
+        env:
+        - name: SERVER_NAME
+          value: app_staging
+

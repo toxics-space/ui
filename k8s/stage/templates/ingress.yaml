@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "fullname" . }}
+  namespace: {{ .Values.namespace }}
+spec:
+  routes:
+    - kind: Rule
+      match: Host(`{{ .Values.subUrl }}.staging.toxics.space`)
+      priority: 1
+      services:
+      - name: {{ include "fullname" . }}
+        port: 80
+

@@ -1,0 +1,7 @@
+namespace: staging-ui
+version: latest
+subUrl: staging-ui
+
+ownRegistry:
+  user: user
+  pass: placeholder
