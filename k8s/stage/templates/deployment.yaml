@@ -12,6 +12,7 @@ spec:
   template:
     metadata:
       labels:
+        environment: staging
         {{- include "selectorLabels" . | nindent 8 }}
     spec:
       imagePullSecrets:
